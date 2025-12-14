@@ -1,4 +1,4 @@
-
+// SimulationMain.cpp
 #include <iostream>
 #include <vector>
 #include <map>
@@ -10,7 +10,7 @@ int main(){
 	manager.initializeRandomParameters();
 
 	//Display initial state
-//	manager.displayState();
+    // /manager.displayState();
 
  	//Students will implement this function to solve the problems
  	solveProblems(manager);

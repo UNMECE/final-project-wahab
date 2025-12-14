@@ -1,3 +1,4 @@
+// AcequiaManagercopp 
 #include "acequia_manager.h"
 #include <iostream>
 #include <random>
@@ -18,11 +19,11 @@ Region::Region(std::string name, double waterLevel, double waterNeed, double wat
 	void Region::updateWaterLevel(double change){
 		waterLevel += change;
 		if(waterLevel >= waterCapacity){ 	//condition for when waterLevel reaches waterCapacity
-			waterLevel =waterCapacity;
+			waterLevel = waterCapacity;
 			isFlooded= true;
 			isInDrought = false;
 			overflow++;
-			//std::cout<<"Overflow in region, "<<name <<". Count increasing. Count: " <<overflow <<std::endl;
+			std::cout<<"Overflow in region, "<<name <<". Count increasing. Count: " <<overflow <<std::endl;
 		}
 		else if(waterLevel < waterCapacity && waterLevel>waterNeed)
 		{
@@ -38,6 +39,7 @@ Region::Region(std::string name, double waterLevel, double waterNeed, double wat
 			isInDrought = true;
 			isFlooded = false;
 			drought++;
+			std::cout<<"Drought in region, "<<name <<". Count increasing. Count: " <<overflow <<std::endl;
 		}
 		if(waterLevel < 0){		//conditions for when waterLevel is empty
 			waterLevel=0;
@@ -265,7 +267,8 @@ void AcequiaManager::initializeCanals(){
 		canals.push_back(new Canal("Canal A", regions[0], regions[1], waterSources[0]));
 		canals.push_back(new Canal("Canal B", regions[1], regions[2], waterSources[2]));
 		canals.push_back(new Canal("Canal C", regions[0], regions[2], waterSources[3]));
-		canals.push_back(new Canal("Canal D", regions[2], regions[0], waterSources[2]));		
+		canals.push_back(new Canal("Canal D", regions[2], regions[0], waterSources[2]));
+		canals.push_back(new Canal("Canal E", regions[1], regions[0], waterSources[1]));	
 }
 
 void AcequiaManager::initializeConstraints(){
@@ -280,6 +283,7 @@ void AcequiaManager::initializeConstraints(){
 
 /*This function moves time forward while also brokering the water transfers that have been taken by the student. */
 void AcequiaManager::nexthour(){
+	
 	for(const auto& canal: canals){
 		if(canal->isOpen == true)
 		{
